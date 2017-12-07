@@ -65,7 +65,9 @@ define(function (require, exports, module) {
         /** @member {string} */
         this.basePath = basePath;
 
+
         var doc = "";
+		/* [CHANGE: remove this useless stuff]
         if (ProjectManager.getProject().name && ProjectManager.getProject().name.length > 0) {
             doc += "\nProject " + ProjectManager.getProject().name;
         }
@@ -75,6 +77,7 @@ define(function (require, exports, module) {
         if (ProjectManager.getProject().version && ProjectManager.getProject().version.length > 0) {
             doc += "\n@version " + ProjectManager.getProject().version;
         }
+		*/
         copyrightHeader = this.getDocuments(doc);
     }
 
@@ -196,6 +199,10 @@ define(function (require, exports, module) {
             if (templatePart.length > 0) {
                 codeWriter.writeLine(templatePart);
             }
+
+			//[CHANGE: add class docstring to header]
+			codeWriter.writeLine("/** My Doc: " + elem.documentation + "\n*/\n");
+			//
 
             codeWriter.writeLine("class " + elem.name + finalModifier + writeInheritance(elem) + " {");
             if (classfiedAttributes._public.length > 0) {
@@ -590,7 +597,9 @@ define(function (require, exports, module) {
             for (i = 0; i < inputParams.length; i++) {
                 var inputParam = inputParams[i];
                 inputParamStrings.push(this.getType(inputParam) + " " + inputParam.name);
+				/* [CHANGE: remove useless empty @param]
                 docs += "\n@param " + inputParam.name;
+				*/
             }
 
             methodStr += ((returnTypeParam.length > 0) ? this.getType(returnTypeParam[0]) : "void") + " ";
