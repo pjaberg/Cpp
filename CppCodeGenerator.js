@@ -201,7 +201,7 @@ define(function (require, exports, module) {
             }
 
 			//[CHANGE: add class docstring to header]
-			codeWriter.writeLine("/** My Doc: " + elem.documentation + "\n*/\n");
+			codeWriter.writeLine("/**\n" + elem.documentation + "\n*/\n");
 			//
 
             codeWriter.writeLine("class " + elem.name + finalModifier + writeInheritance(elem) + " {");
